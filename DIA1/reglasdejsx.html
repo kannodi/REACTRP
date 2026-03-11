@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        //REGLA -1 
+        // prueba de error: intentamos devolver dos h2 sueltos
+        // resultado: da error critico porque js solo puede retornar una cosa a la vez
+        function unsoloelemento() {
+            return (
+         <h2>plato 1</h2>
+         <h2>plato 2</h2>
+            );
+        }
+        // en el arreglo se añaden fragments <> para agrupar y envie un solo valor
+        function unsoloelementoFIX() {
+            return (
+                <>
+                    <h2>plato 1</h2>
+                    <h2>plato 2</h2>
+                </>
+            );
+        }
+
+        // REGLA 2
+        // prueba de warning: usamos class en un li
+        // resultado: la pagina carga pero sale un aviso amarillo en consola
+        function pruebaclass() {
+            return (
+                <li class="plato-agotado">ceviche agotado</li>
+            );
+        }
+
+        // corregido: cambiamos a classname, ya que class tambien se usa en javascript y marcaria warning
+        function pruebaclassfix() {
+            return (
+                <li className="plato-agotado">ceviche agotado</li>
+            );
+        }
+        // los errores no salen en este archivo html, ya que suponemos que saldrian en proyecto jsx
+
+
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        root.render(<Pruebaclass />);
+    </script>
+</body>
+
+</html>
