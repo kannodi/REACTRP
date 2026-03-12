@@ -74,7 +74,7 @@
             );
         }
 
-
+        //REGLA 4
         // 1. mismo array de datos
         const listaDeMenu = [
             { id: 1, nombre: "Lomo saltado", categoria: "segundos", precio: 18, stock: 3, disponible: true },
@@ -87,6 +87,18 @@
                 <ul>
                     {listaDeMenu.map(plato => (
                         <li>
+                            {plato.nombre}
+                        </li>
+                    ))}
+                </ul>
+            );
+        }
+        // USO DE KEY, FORMA CORRECTA, IDENTIFICADOR EN BASE AL ID, NO EN POSICION
+        function ReglaCuatroFIX() {
+            return (
+                <ul>
+                    {listaDeMenu.map(plato => (
+                        <li key={plato.id}>
                             {plato.nombre}
                         </li>
                     ))}
