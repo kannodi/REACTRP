@@ -19,9 +19,10 @@
         // prueba de error: intentamos devolver dos h2 sueltos
         // resultado: da error critico porque js solo puede retornar una cosa a la vez
         function unsoloelemento() {
-            return (
-         <h2>plato 1</h2>
-         <h2>plato 2</h2>
+            return (<>
+                <h2>plato 1</h2>
+                <h2>plato 2</h2>
+            </>
             );
         }
         // en el arreglo se añaden fragments <> para agrupar y envie un solo valor
@@ -37,7 +38,7 @@
         // REGLA 2
         // prueba de warning: usamos class en un li
         // resultado: la pagina carga pero sale un aviso amarillo en consola
-        function pruebaclass() {
+        function Pruebaclass() {
             return (
                 <li class="plato-agotado">ceviche agotado</li>
             );
@@ -50,10 +51,52 @@
             );
         }
         // los errores no salen en este archivo html, ya que suponemos que saldrian en proyecto jsx
+        //reglas 3
+        // 1. EL ERROR (Fuerza el fallo)/*
+        // function PruebaReglaTres() {
+        //       const disponible = true;
+        //   return (
+        //       <div>
+        //          {/* ❌ Esto romperá el script. Babel dirá: "Unexpected token" */}
+        //           <p>Estado: { if(disponible) {"ok"} }</p>
+        //        </div>
+        //    );
+        //  }
+
+        // 2. EL FIX (La forma correcta)
+        function PruebaReglaTresFIX() {
+            const disponible = true;
+            return (
+                <div>
+                    {/* ✅ El ternario es una EXPRESIÓN, por eso funciona */}
+                    <p>Estado: {disponible ? "✅ disponible" : "❌ agotado"}</p>
+                </div>
+            );
+        }
+
+
+        // 1. mismo array de datos
+        const listaDeMenu = [
+            { id: 1, nombre: "Lomo saltado", categoria: "segundos", precio: 18, stock: 3, disponible: true },
+            { id: 2, nombre: "Arroz con pollo", categoria: "segundos", precio: 12, stock: 5, disponible: true },
+            { id: 3, nombre: "Sopa de verduras", categoria: "entradas", precio: 8, stock: 0, disponible: false },
+        ];
+
+        function ReglaCuatro() {
+            return (
+                <ul>
+                    {listaDeMenu.map(plato => (
+                        <li>
+                            {plato.nombre}
+                        </li>
+                    ))}
+                </ul>
+            );
+        }
 
 
         const root = ReactDOM.createRoot(document.getElementById("root"));
-        root.render(<Pruebaclass />);
+        root.render(<ReglaCuatro />);
     </script>
 </body>
 
