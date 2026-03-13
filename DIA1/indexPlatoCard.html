@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>PLATO CARD</title>
 </head>
 
 <body>
@@ -37,9 +37,9 @@
 
         function Carta() {
             return (
-                <ul>
+                <ul> {/*aca jala los platos del mock*/}
                     {platosMock.map(plato => (
-                        <PlatoCard
+                        <PlatoCard //aca se lo pasa a platocard como props
                             key={plato.id}
                             nombre={plato.nombre}
                             categoria={plato.categoria}
@@ -60,7 +60,7 @@
 
 
         const root = ReactDOM.createRoot(document.getElementById("root"));
-        root.render(<PlatoCard />);
+        root.render(<Carta />);
     </script>
 </body>
 
