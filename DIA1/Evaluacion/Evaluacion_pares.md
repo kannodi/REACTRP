@@ -4,18 +4,18 @@
 
 ## Ronda 1
 
-**Evaluador:**
-**Evaluado:**
-**Escenario elegido:** (1, 2 o 3)
+**Evaluador:**  Paolo
+**Evaluado:**  Joel
+**Escenario elegido:** 1
 
 **Resumen de la respuesta:**
-
+Carta toma los datos del array platosMock y los pasa como props a la funcion PlatoCard.
 
 **Qué entendió bien:**
-
+La funcionalidad del array entre platosMock y carta.
 
 **Qué necesita repasar:**
-
+La funcionalidad de key y los identificadores
 
 ---
 
