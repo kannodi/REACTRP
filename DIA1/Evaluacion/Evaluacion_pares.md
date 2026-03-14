@@ -21,18 +21,19 @@ La funcionalidad de key y los identificadores
 
 ## Ronda 2
 
-**Evaluador:**
-**Evaluado:**
-**Escenario elegido:** (1, 2 o 3 — diferente al de la Ronda 1)
+**Evaluador:**  Joel
+**Evaluado:**  Paolo
+**Escenario elegido:** 3
 
 **Resumen de la respuesta:**
-
+- En archivos jsx no se utiliza class al este estar reservado para js, en su lugar se utiliza className.
+- En archivos jsx es mas apropiado declarar las condicionales de la siguiente manera {condicional ? "verdadero" : "falso"}
 
 **Qué entendió bien:**
-
+El uso de className y la declaracion de condicionales.
 
 **Qué necesita repasar:**
-
+Repasar sintaxis de JSX.
 
 ---
 
