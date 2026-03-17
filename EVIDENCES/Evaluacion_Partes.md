@@ -27,13 +27,13 @@ El uso de los Hooks, los services y context
 **Escenario elegido:** (1)
 
 **Resumen de la respuesta:**
-
+PlatoCard vive en src/components/ porque es una pieza reutilizable y se puede usar en cualquier página. No va en pages/ porque no es una vista completa con su propia URL, es solo una tarjeta que muestra un plato
 
 **Qué entendió bien:**
-
+Sabe que es lo que debe ir en componentes 
 
 **Qué necesita repasar:**
-
+Sabe lo necesario hasta el dia de hoy acorde el documento
 
 ---
 
