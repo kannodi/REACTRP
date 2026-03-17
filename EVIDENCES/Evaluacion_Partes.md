@@ -4,26 +4,27 @@
 
 ## Ronda 1
 
-**Evaluador:**
-**Evaluado:**
-**Escenario elegido:** (1, 2 o 3)
+**Evaluador:** Joel
+**Evaluado:**  Paolo
+**Escenario elegido:** (2)
 
 **Resumen de la respuesta:**
-
+El archivo main.jsx es el puente entre el index.html y el codigo de React.
+Mediante getelementById se selecciona el elemento con id "root" y se le asigna el componente App.
 
 **Qué entendió bien:**
-
+La conexion entre el index.html y el codigo de React a traves de main.jsx.
 
 **Qué necesita repasar:**
-
+El uso de los Hooks, los services y context
 
 ---
 
 ## Ronda 2
 
-**Evaluador:**
-**Evaluado:**
-**Escenario elegido:** (1, 2 o 3 — diferente al de la Ronda 1)
+**Evaluador:** Paolo
+**Evaluado:** Joel
+**Escenario elegido:** (1)
 
 **Resumen de la respuesta:**
 
