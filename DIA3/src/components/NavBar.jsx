@@ -1,9 +1,9 @@
-
-function NavBar() {
+import PropTypes from "prop-types"
+function NavBar( {nombreRestaurante = "Restaurante Raul"}) {
     return (
         <>
             <header>
-                <h1>Restaurante</h1>
+                <h1>{nombreRestaurante}</h1>
             </header>
             <nav>
                 <ul>
@@ -15,5 +15,8 @@ function NavBar() {
         </>
     )
 }
+NavBar.propTypes = {
+    nombreRestaurante: PropTypes.string
+  };
 
 export default NavBar
