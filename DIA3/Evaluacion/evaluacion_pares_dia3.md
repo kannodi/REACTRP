@@ -30,17 +30,17 @@ El manejo de PropTypes.
 **Escenario elegido:** (2)
 
 **Resumen de la respuesta:**
-
+Indicó los props de cada componente y los nombró
 **Escenario 2:**
 Abre DevTools en la pestaña Components. Selecciona cualquier MesaCard. Explícame qué ves en el panel derecho y qué significa cada campo.
 
 
 
 **Qué entendió bien:**
-
+Entiende que los datos llegan del padre y se reflejan en devtools gracias al componente
 
 **Qué necesita repasar:**
-
+Manejo de deeptools, la extension para poder ver componentes dentro de f12
 
 ---
 
