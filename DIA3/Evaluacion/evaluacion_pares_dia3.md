@@ -4,28 +4,36 @@
 
 ## Ronda 1
 
-**Evaluador:**
-**Evaluado:**
-**Escenario elegido:** (1, 2 o 3)
+**Evaluador:** Joel
+**Evaluado:** Paolo
+**Escenario elegido:** (1)
 
 **Resumen de la respuesta:**
 
+**Escenario 1:**
+Muéstrame MesaCard en el código. Sin ejecutar nada, dime: ¿qué pasa si el padre pasa estado="cerrada"? ¿Qué mostraría el componente? ¿Cómo lo evitarías con PropTypes?
+
+Si el padre pasa estado="cerrada", el componente mostraría los cambios actuales del padre, ya que el componente recibe la prop estado y la muestra directamente. Para evitarlo, usaría PropTypes para integrar el reglamento de lo que muestra el componente.
 
 **Qué entendió bien:**
-
+Relacion entre prop y estado, y como evitar la desincronizacion de datos.
 
 **Qué necesita repasar:**
-
+El manejo de PropTypes.
 
 ---
 
 ## Ronda 2
 
-**Evaluador:**
-**Evaluado:**
-**Escenario elegido:** (1, 2 o 3 — diferente al de la Ronda 1)
+**Evaluador:** Paolo
+**Evaluado:** Joel
+**Escenario elegido:** (2)
 
 **Resumen de la respuesta:**
+
+**Escenario 2:**
+Abre DevTools en la pestaña Components. Selecciona cualquier MesaCard. Explícame qué ves en el panel derecho y qué significa cada campo.
+
 
 
 **Qué entendió bien:**
