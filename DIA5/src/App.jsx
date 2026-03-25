@@ -6,10 +6,10 @@ import CarritoPage from './pages/CarritoPage'
 function App() {
   return (
     <div>
+      <CarritoPage />
       <NavBar />
       <Home />
       <MesasPage />
-      <CarritoPage />
       <ComandasPages />
     </div>
   )
