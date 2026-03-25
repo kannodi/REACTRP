@@ -26,25 +26,54 @@ export default function CarritoPage() {
 
 
     function agregarPlato(plato) {
-        setCarrito([...carrito, plato]);
+        const existe = carrito.find((item) => item.id === plato.id);
+        if (existe) {
+            setCarrito(carrito.map((item) =>
+                item.id === plato.id
+                    ? { ...item, cantidad: item.cantidad + 1 }
+                    : item
+            ));
+        } else {
+            setCarrito([...carrito, { ...plato, cantidad: 1 }]);
+        }
     }
+
 
     function quitarPlato(id) {
         setCarrito(carrito.filter((item, indexActual) => indexActual !== id));
     }
 
+    function restarPlato(platoInput) {
+        // Buscamos el plato que queremos restar
+        const platoEnCarrito = carrito.find((item) => item.id === platoInput.id);
+        if (platoEnCarrito.cantidad === 1) {
+            // Si solo queda 1 y le damos a restar, quitamos el plato completamente del arreglo
+            setCarrito(carrito.filter((item) => item.id !== platoInput.id));
+        } else {
+            // Si hay más de 1, simplemente le restamos -1 a su cantidad actual
+            setCarrito(carrito.map((item) =>
+                item.id === platoInput.id
+                    ? { ...item, cantidad: item.cantidad - 1 }
+                    : item
+            ));
+        }
+    }
+
+    const total = carrito.reduce((sum, item) => sum + item.precio * item.cantidad, 0);
+
     return (
         <div>
             <h2>Armar Comanda</h2>
             {platosMock.map(plato => (
-                <div key={plato._id}>
+                <div key={plato.id}>
                     <span>{plato.nombre} — S/ {plato.precio}</span>
                     <button onClick={() => agregarPlato(plato)}>Agregar</button>
                 </div>
             ))}
             {carrito.map((item, index) => (
                 <div key={index}>
-                    <span>{item.nombre}</span>
+                    <span>{item.nombre} X {item.cantidad} Total: S/ {item.precio * item.cantidad}</span>
+                    <button onClick={() => restarPlato(item)}>Limpiar comanda</button>
                     <button onClick={() => quitarPlato(index)}>Quitar</button>
                 </div>
             ))}
