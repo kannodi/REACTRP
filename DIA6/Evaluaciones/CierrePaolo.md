@@ -1,5 +1,5 @@
 # 🟢 BLOQUE F — Documento de cierre
-**ESTUDIANTE:** [Nombre del Estudiante A]
+**ESTUDIANTE:** Paolo
 
 **1. El mock del Día 5 y la API del Día 6 devuelven platos con la misma forma. ¿Qué ventaja tiene eso? ¿Qué habrían tenido que cambiar en el componente si la API devolviera una estructura diferente?**
 > [Escribe acá tu respuesta con tus propias palabras]
