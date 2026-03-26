@@ -1,15 +1,10 @@
-import { supabase } from './supabase';
+import axios from 'axios';
+
+// Leemos la URL desde el archivo .env.local
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 export async function getPlatos() {
-    // Usamos el cliente de Supabase para obtener los datos de la tabla 'platillos'
-    const { data, error } = await supabase
-        .from('platillos')
-        .select('*');
-        
-    if (error) {
-        console.error("Error obteniendo platos:", error);
-        throw new Error(error.message);
-    }
-    
-    return data;
+    // Hacemos la petición al endpoint de platos
+    const response = await axios.get(`${BASE_URL}/api/platos`);
+    return response.data; // Axios ya nos da el JSON listo
 }
