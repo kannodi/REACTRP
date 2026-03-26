@@ -61,7 +61,7 @@ export default function CarritoPage() {
         }
     }
 
-    const total = carrito.reduce((sum, item) => sum + item.precio * item.cantidad, 0);
+    //const total = carrito.reduce((sum, item) => sum + item.precio * item.cantidad, 0);
 
     return (
         <div>

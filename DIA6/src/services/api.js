@@ -1,15 +1,14 @@
-import { supabase } from './supabase';
 
+
+import axios from 'axios';
+
+const BASE_URL = import.meta.env.VITE_API_URL;
+console.log(BASE_URL);
 export async function getPlatos() {
-    // Usamos el cliente de Supabase para obtener los datos de la tabla 'platillos'
-    const { data, error } = await supabase
-        .from('platillos')
-        .select('*');
-        
-    if (error) {
-        console.error("Error obteniendo platos:", error);
-        throw new Error(error.message);
-    }
-    
-    return data;
+    const response = await axios.get(`${BASE_URL}/api/menu`, {
+        headers: {
+            'ngrok-skip-browser-warning': 'true'
+        }
+    });
+    return response.data;
 }
