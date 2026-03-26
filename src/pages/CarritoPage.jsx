@@ -12,6 +12,9 @@ export default function CarritoPage() {
             try {
                 setLoading(true);
                 const data = await getPlatos();
+                if (!Array.isArray(data)) {
+                    throw new Error("La respuesta de la API no es válida (verifica VITE_API_URL)");
+                }
                 setPlatos(data);
             } catch (err) {
                 setError(err.message);
