@@ -13,16 +13,15 @@ import CarritoPage from './pages/CarritoPage'
 function App() {
   return (
     <BrowserRouter>
-      <NavBar />
       <Routes>
         {/* Ruta por defecto */}
         <Route path="/" element={<Navigate to='/login' replace />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/carta" element={<ProtectedRoute><CartaPage /></ProtectedRoute>} />
-        <Route path="/menu" element={<ProtectedRoute><MenuPage /></ProtectedRoute>} />
-        <Route path="/carrito" element={<ProtectedRoute><CarritoPage /></ProtectedRoute>} />
-        <Route path="/mesas" element={<ProtectedRoute><MesasPage /></ProtectedRoute>} />
-        <Route path="/comandas" element={<ProtectedRoute><ComandasPages /></ProtectedRoute>} />
+        <Route path="/login" element={<><LoginPage /></>} />
+        <Route path="/carta" element={<ProtectedRoute><NavBar /><CartaPage /></ProtectedRoute>} />
+        <Route path="/menu" element={<ProtectedRoute><NavBar /><MenuPage /></ProtectedRoute>} />
+        <Route path="/carrito" element={<ProtectedRoute><NavBar /><CarritoPage /></ProtectedRoute>} />
+        <Route path="/mesas" element={<ProtectedRoute><NavBar /><MesasPage /></ProtectedRoute>} />
+        <Route path="/comandas" element={<ProtectedRoute><NavBar /><ComandasPages /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   )
