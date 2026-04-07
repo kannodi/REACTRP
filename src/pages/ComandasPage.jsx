@@ -13,29 +13,39 @@ const ComandasPages = () => {
 
     const handleMostrarMesas = () => {
         setMostrarMesas(true);
+        setMostrarComandas(false);
     }
-    const handleOcultarMesas = () => {
+    /*const handleOcultarMesas = () => {
         setMostrarMesas(false);
-    }
+    }*/
     const handleTomarComanda = () => {
+        setMostrarMesas(false);
         setMostrarComandas(true);
     };
 
+    const handleSeleccionarMesa = (numero) => {
+        setMesaSeleccionada(numero);
+        handleTomarComanda();
+    };
+
     if (mostrarComandas) {
-        return <CarritoPage />;
+        return <CarritoPage mesaSeleccionada={mesaSeleccionada} />;
     }
 
 
     return (
         <>
-            <div className='flex items-center m-10'>
+            <div className='flex items-center m-10 gap-2'>
                 <button onClick={handleMostrarMesas} className='bg-blue-400 text-white text-2xl font-bold p-2 rounded-xl m-2'>Mesas</button>
-                <button onClick={handleOcultarMesas} className='bg-blue-400 text-white text-2xl font-bold p-2 rounded-xl m-2'>Para llevar</button>
+                <button onClick={() => { handleTomarComanda(); setMesaSeleccionada(null); }} className='bg-blue-400 text-white text-2xl font-bold p-2 rounded-xl m-2'>Para llevar</button>
             </div>
             {mostrarMesas && (
-                <div className='flex items-center m-10'>
+                <div className='grid grid-cols-3 gap-5 m-10'>
                     {mesasMock.map(mesa => (
-                        <MesaCard key={mesa.numero} numero={mesa.numero} capacidad={mesa.capacidad} estado={mesa.estado} comensales={mesa.comensales} />
+                        <button onClick={() => handleSeleccionarMesa(mesa.numero) && handleTomarComanda()} key={mesa.numero}
+                            className='bg-gray-500 hover:bg-green-500 text-white text-2xl font-bold p-2 rounded-xl'>
+                            <MesaCard numero={mesa.numero} capacidad={mesa.capacidad} estado={mesa.estado} comensales={mesa.comensales} />
+                        </button>
                     ))}
                 </div>
             )}

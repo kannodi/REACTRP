@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { getPlatos } from '../services/api';
 
-export default function CarritoPage() {
+export default function CarritoPage({ mesaSeleccionada }) {
     const [platos, setPlatos] = useState([]);
     const [carrito, setCarrito] = useState([]);
     const [error, setError] = useState(null);
@@ -75,7 +75,7 @@ export default function CarritoPage() {
     }
     return (
         <div className='m-10 flex flex-col gap-2 justify-start'>
-            <h2 className='bg-blue-400 text-white text-2xl font-bold p-2 rounded-xl mb-2'> 🧾Armar Comanda</h2>
+            <h2 className='bg-blue-400 text-white text-2xl font-bold p-2 rounded-xl mb-2'> 🧾NUEVA COMANDA</h2>
             <div className='grid grid-cols-2 gap-6'>
 
                 {/* Columna izquierda — platos */}
@@ -89,9 +89,15 @@ export default function CarritoPage() {
                 </div>
 
                 {/* Columna derecha — carrito */}
-                <div className='flex flex-col gap-2'>
-                    <h2 className='bg-yellow-400 text-white text-md font-bold p-2 rounded-xl mb-2'>🛒 Carrito</h2>
-                    <span className='flex justify-between items-center'><h3>Total de pedidos: ({carrito.length})</h3> <button className='border border-red-400 rounded-xl hover:bg-red-400 hover:text-white px-2 py-1' onClick={limpiarCarrito}>Limpiar Carrito</button></span>
+                <div className='flex flex-col gap-3'>
+                    <h2 className='bg-yellow-500 text-white text-md font-bold p-3 gap-5 rounded-xl mb-5 flex justify-between items-center'>
+                        <span>🛒 LISTADO DE COMANDA</span>
+                        <span> {mesaSeleccionada ? `Mesa ${mesaSeleccionada}` : 'PARA LLEVAR'} </span>
+                    </h2>
+                    <span className='flex justify-between items-center'><h3>Total de pedidos: ({carrito.length})</h3>
+                        <button className='border border-red-400 rounded-xl hover:bg-red-400 hover:text-white px-2 py-1'
+                            onClick={limpiarCarrito}>Limpiar Carrito</button>
+                    </span>
                     {carrito.map((item, index) => (
                         <div className='grid grid-cols-4 justify-between items-center m-2' key={index}>
                             <strong>{item.nombre}</strong>
