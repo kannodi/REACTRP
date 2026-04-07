@@ -25,8 +25,8 @@ export default function CarritoPage() {
         cargarDatos();
     }, []);
 
-    if (loading) return <p>Cargando menú...</p>;
-    if (error) return <p>Error: {error} — verifica que el backend está corriendo.</p>;
+    if (loading) return <p className='text-blue-500 animate-pulse m-4'>Cargando la carrito...</p>;
+    if (error) return <p className='bg-red-100 text-red-500 m-4'>Error: {error}</p>;
 
 
     function agregarPlato(plato) {
@@ -62,26 +62,52 @@ export default function CarritoPage() {
             ));
         }
     }
-
+    function limpiarCarrito() {
+        setCarrito([]);
+    }
     //const total = carrito.reduce((sum, item) => sum + item.precio * item.cantidad, 0);
-
+    function total() {
+        let total = 0;
+        carrito.forEach(item => {
+            total += item.precio * item.cantidad;
+        });
+        return total;
+    }
     return (
-        <div>
-            <h2>Armar Comanda</h2>
-            {platos.map(plato => (
-                <div key={plato._id}>
-                    <span>{plato.nombre} — S/ {plato.precio}</span>
-                    <button onClick={() => agregarPlato(plato)}>Agregar</button>
+        <div className='m-10 flex flex-col gap-2 justify-start'>
+            <h2 className='bg-blue-400 text-white text-2xl font-bold p-2 rounded-xl mb-2'> 🧾Armar Comanda</h2>
+            <div className='grid grid-cols-2 gap-6'>
+
+                {/* Columna izquierda — platos */}
+                <div className='flex flex-col gap-3'>
+                    {platos.map(plato => (
+                        <div className='flex justify-between items-center' key={plato._id}>
+                            <strong className='px-2 py-1'>{plato.nombre} — S/ {plato.precio}</strong>
+                            <button className='bg-gray-200 rounded-xl px-2 py-1' onClick={() => agregarPlato(plato)}>Agregar</button>
+                        </div>
+                    ))}
                 </div>
-            ))}
-            {carrito.map((item, index) => (
-                <div key={index}>
-                    <span>{item.nombre} X {item.cantidad} Total: S/ {item.precio * item.cantidad}</span>
-                    <button onClick={() => restarPlato(item)}>Limpiar comanda</button>
-                    <button onClick={() => quitarPlato(index)}>Quitar</button>
+
+                {/* Columna derecha — carrito */}
+                <div className='flex flex-col gap-2'>
+                    <h2 className='bg-yellow-400 text-white text-md font-bold p-2 rounded-xl mb-2'>🛒 Carrito</h2>
+                    <span className='flex justify-between items-center'><h3>Total de pedidos: ({carrito.length})</h3> <button className='border border-red-400 rounded-xl hover:bg-red-400 hover:text-white px-2 py-1' onClick={limpiarCarrito}>Limpiar Carrito</button></span>
+                    {carrito.map((item, index) => (
+                        <div className='grid grid-cols-4 justify-between items-center m-2' key={index}>
+                            <strong>{item.nombre}</strong>
+                            <div className='flex justify-between items-center'>
+                                <button className='bg-gray-200 rounded-full px-2 py-1' onClick={() => restarPlato(item)}> - </button>
+                                <span>{item.cantidad}</span>
+                                <button className='bg-gray-200 rounded-full px-2 py-1' onClick={() => agregarPlato(item)}> + </button>
+                            </div>
+                            <strong className='text-center'> S/ {item.precio * item.cantidad}</strong>
+                            <button onClick={() => quitarPlato(index)}>🗑️</button>
+                        </div>
+                    ))}
+                    <strong>Total: S/ {total()}</strong>
                 </div>
-            ))}
-            <h3>Comanda ({carrito.length} ítems)</h3>
+
+            </div>
         </div>
     );
 }
