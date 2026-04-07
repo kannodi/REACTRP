@@ -22,13 +22,13 @@ function NavBar({ nombreRestaurante = "Restaurante Raul" }) {
     return (
         <>
             <header>
-                <h1 className='text-yellow-400 text-4xl p-7' align='center' width='100%' height='100%'>{nombreRestaurante}</h1>
+                <h1 className=' animate-pulse text-blue-600 text-4xl p-7' align='center' width='100%' height='100% '>{nombreRestaurante}</h1>
             </header>
-            <nav className="flex items-center justify-between px-7 mb-5 bg-blue-400">
+            <nav className="flex items-center justify-between px-7 mb-3 bg-blue-400">
                 <div className=' flex gap-2'>
-                    <button className="  text-white font-bold text-xl rounded-full px-1 py-1 w-fit m-2 "><a href="/carta">Carta</a></button>
-                    <button className="  text-white font-bold text-xl rounded-full px-1 py-1 w-fit m-2 "><a href="/comandas">Comandas</a></button>
                     <button className="  text-white font-bold text-xl rounded-full px-1 py-1 w-fit m-2 "><a href="/menu">Menu</a></button>
+                    <button className="  text-white font-bold text-xl rounded-full px-1 py-1 w-fit m-2 "><a href="/comandas">Comandas</a></button>
+                    <button className="  text-white font-bold text-xl rounded-full px-1 py-1 w-fit m-2 "><a href="/carta">Carta</a></button>
                 </div>
                 <div>
                     {sesion ? (
