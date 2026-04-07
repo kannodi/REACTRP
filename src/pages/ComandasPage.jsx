@@ -34,7 +34,7 @@ const ComandasPages = () => {
 
     return (
         <>
-            <div className='flex items-center ml-10 mb-3 gap-2 '>
+            <div className='flex items-center ml-10 mb-3 gap-2 mt-3'>
                 <button onClick={handleMostrarMesas} className='bg-blue-400 text-white text-2xl font-bold p-2 rounded-xl m-2'>Mesas</button>
                 <button onClick={() => { handleTomarComanda(); setMesaSeleccionada(null); }} className='bg-blue-400 text-white text-2xl font-bold p-2 rounded-xl m-2'>Para llevar</button>
             </div>

@@ -11,13 +11,14 @@ import ComandasPages from './pages/ComandasPage'
 function App() {
   return (
     <BrowserRouter>
+      <NavBar />
       <Routes>
         {/* Ruta por defecto */}
         <Route path="/" element={<Navigate to='/login' replace />} />
         <Route path="/login" element={<><LoginPage /></>} />
-        <Route path="/menu" element={<ProtectedRoute><NavBar /><MenuPage /></ProtectedRoute>} />
-        <Route path="/comandas" element={<ProtectedRoute><NavBar /><ComandasPages /></ProtectedRoute>} />
-        <Route path="/carta" element={<ProtectedRoute><NavBar /><CartaPage /></ProtectedRoute>} />
+        <Route path="/menu" element={<ProtectedRoute><MenuPage /></ProtectedRoute>} />
+        <Route path="/comandas" element={<ProtectedRoute><ComandasPages /></ProtectedRoute>} />
+        <Route path="/carta" element={<ProtectedRoute><CartaPage /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   )
