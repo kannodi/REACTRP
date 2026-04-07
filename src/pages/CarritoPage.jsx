@@ -105,6 +105,7 @@ export default function CarritoPage() {
                         </div>
                     ))}
                     <strong>Total: S/ {total()}</strong>
+
                 </div>
 
             </div>

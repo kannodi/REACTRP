@@ -17,11 +17,11 @@ function App() {
         {/* Ruta por defecto */}
         <Route path="/" element={<Navigate to='/login' replace />} />
         <Route path="/login" element={<><LoginPage /></>} />
-        <Route path="/carta" element={<ProtectedRoute><NavBar /><CartaPage /></ProtectedRoute>} />
-        <Route path="/menu" element={<ProtectedRoute><NavBar /><MenuPage /></ProtectedRoute>} />
-        <Route path="/carrito" element={<ProtectedRoute><NavBar /><CarritoPage /></ProtectedRoute>} />
-        <Route path="/mesas" element={<ProtectedRoute><NavBar /><MesasPage /></ProtectedRoute>} />
-        <Route path="/comandas" element={<ProtectedRoute><NavBar /><ComandasPages /></ProtectedRoute>} />
+        <Route path="/carta" element={<><NavBar /><CartaPage /></>} />
+        <Route path="/menu" element={<><NavBar /><MenuPage /></>} />
+        <Route path="/carrito" element={<><NavBar /><CarritoPage /></>} />
+        <Route path="/mesas" element={<><NavBar /><MesasPage /></>} />
+        <Route path="/comandas" element={<><NavBar /><ComandasPages /></>} />
       </Routes>
     </BrowserRouter>
   )
