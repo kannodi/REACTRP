@@ -5,8 +5,8 @@ import MesaCard from '../components/MesaCard'
 function MesasPage() {
   return (
     <div>
-      <h1>Mesas del Restaurante</h1>
-      <ul>
+      <h1 className='m-7'>Mesas del Restaurante</h1>
+      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 m-7'>
         {mesasMock.map(mesa => (
           <MesaCard
             key={mesa.id}
@@ -16,7 +16,7 @@ function MesasPage() {
             comensales={mesa.comensales}
           />
         ))}
-      </ul>
+      </div>
     </div>
   )
 }

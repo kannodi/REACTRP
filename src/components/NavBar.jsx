@@ -19,10 +19,12 @@ function NavBar({ nombreRestaurante = "Restaurante Raul" }) {
             navigate('/login');
         }
     }
-    const AccionesNav = ({ isActive }) => {
-        isActive
-            ? 'text-yellow-400 font-bold border-b-2 border-yellow-400 pb-1'
-            : 'hover:text-yellow-300 transition-colors'
+    const navBarClass = ({ isActive }) => {
+        const navBar = "text-black font-bold text-xl px-1 py-1 w-fit m-2 ";
+
+        return navBar + (isActive
+            ? 'text-white border-b-2 border-white pb-1'
+            : 'hover:text-gray-300 transition-colors');
     }
 
     return (
@@ -30,9 +32,10 @@ function NavBar({ nombreRestaurante = "Restaurante Raul" }) {
             <nav className="flex items-center justify-between px-7 bg-blue-400">
                 <h1 className='  text-white text-4xl p-7' align='center' width='100%' height='100% '>{nombreRestaurante}</h1>
                 <div className=' flex gap-2'>
-                    <NavLink to='/menu' className="text-white font-bold text-xl rounded-full px-1 py-1 w-fit m-2 ">Menu</NavLink>
-                    <NavLink to='/comandas' className="text-white font-bold text-xl rounded-full px-1 py-1 w-fit m-2 ">Comandas</NavLink>
-                    <NavLink to='/carta' className="text-white font-bold text-xl rounded-full px-1 py-1 w-fit m-2 ">Carta</NavLink >
+                    <NavLink to='/menu' className={navBarClass}>Menu</NavLink>
+                    <NavLink to='/comandas' className={navBarClass}>Comandas</NavLink>
+                    <NavLink to='/carta' className={navBarClass}>Carta</NavLink >
+                    <NavLink to='/mesas' className={navBarClass}>Mesas</NavLink >
                 </div >
                 <div>
                     {sesion ? (
