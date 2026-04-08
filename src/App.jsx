@@ -17,7 +17,7 @@ function App() {
         {/* Ruta por defecto enviara al login*/}
         <Route path="/" element={<Navigate to='/login' replace />} />
         {/*Rutas protegidas*/}
-        <Route path="/login" element={<><LoginPage /></>} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/menu" element={<ProtectedRoute><MenuPage /></ProtectedRoute>} />
         <Route path="/comandas" element={<ProtectedRoute><ComandasPages /></ProtectedRoute>} />
         <Route path="/carta" element={<ProtectedRoute><CartaPage /></ProtectedRoute>} />

@@ -41,7 +41,7 @@ function NavBar({ nombreRestaurante = "Restaurante Raul" }) {
                     {sesion ? (
                         <button onClick={botonLogout} className="text-white font-bold text-xl rounded-full px-1 py-1 w-fit m-2 flex justify-end">SALIR</button>
                     ) : (
-                        <button onClick={navigate('/login')} className="text-white font-bold text-xl rounded-full px-1 py-1 w-fit m-2 flex justify-end">ENTRAR</button>
+                        <button href='/login' className="text-white font-bold text-xl rounded-full px-1 py-1 w-fit m-2 flex justify-end">ENTRAR</button>
                     )}
                 </div>
             </nav >

@@ -18,7 +18,6 @@ export default function LoginPage() {
             const data = await login(email, password);
             localStorage.setItem('token', data.token);
             console.log('Login exitoso — token guardado');
-
             navigate('/menu');
         } catch (err) {
             setError(err.response?.data?.message || 'Credenciales incorrectas');
