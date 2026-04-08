@@ -42,7 +42,9 @@ const ComandasPages = () => {
                 <div className='grid grid-cols-5 gap-5 ml-10 mr-10'>
                     {mesasMock.map(mesa => (
                         <button onClick={() => handleSeleccionarMesa(mesa.numero) && handleTomarComanda()} key={mesa.numero}
-                            className={`${mesa.estado === 'libre' ? 'bg-green-500 hover:bg-green-700' : mesa.estado === 'ocupada' ? 'bg-red-500 hover:bg-red-700' : 'bg-yellow-500 hover:bg-yellow-700'} text-white text-2xl font-bold p-2 rounded-xl`}>
+                            className={`${mesa.estado === 'libre' ? 'bg-green-500 hover:bg-green-700' :
+                                mesa.estado === 'ocupada' ? 'bg-red-500 hover:bg-red-700' :
+                                    'bg-yellow-500 hover:bg-yellow-700'} text-white text-2xl font-bold p-2 rounded-xl`}>
                             <MesaCard numero={mesa.numero} capacidad={mesa.capacidad} estado={mesa.estado} comensales={mesa.comensales} />
                         </button>
                     ))}

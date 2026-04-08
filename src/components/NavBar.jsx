@@ -35,7 +35,7 @@ function NavBar({ nombreRestaurante = "Restaurante Raul" }) {
                     <NavLink to='/menu' className={navBarClass}>Menu</NavLink>
                     <NavLink to='/comandas' className={navBarClass}>Comandas</NavLink>
                     <NavLink to='/carta' className={navBarClass}>Carta</NavLink >
-                    <NavLink to='/mesas' className={navBarClass}>Mesas</NavLink >
+                    {/*<NavLink to='/mesas' className={navBarClass}>Mesas</NavLink >*/}
                 </div >
                 <div>
                     {sesion ? (
