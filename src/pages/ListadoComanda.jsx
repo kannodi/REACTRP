@@ -30,6 +30,31 @@ export default function ListadoComanda({ mesaSeleccionada }) {
     if (error) return <p className='bg-red-100 text-red-500 m-4'>Error: {error}</p>;
 
 
+    function agregarPlato(plato) {
+        const existe = pedido.items.find(item => item._id === plato._id);
+        let nuevosItems;
+        if (existe) {
+            nuevosItems = pedido.items.map(item =>
+                item._id === plato._id
+                    ? { ...item, cantidad: item.cantidad + 1 }
+                    : item
+            );
+        } else {
+            nuevosItems = [...pedido.items, { ...plato, precioUnitario: plato.precio, cantidad: 1 }];
+        }
+        const nuevoTotal = nuevosItems.reduce((acc, item) => acc + (item.precioUnitario * item.cantidad), 0);
+
+        setPedido({
+            ...pedido,
+            items: nuevosItems,
+            total: nuevoTotal
+        });
+    }
+
+    function restarPlato(platoInput) {
+
+    }
+
 
     function quitarPlato(_id) {
         setPedido(pedido.items.filter((item, indexActual) => indexActual !== _id));
