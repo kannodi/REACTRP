@@ -6,7 +6,7 @@ export default function MenuPage() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const { pedido } = usePedido();
-    const totalItems = pedido.items.reduce((acc, i) => acc + i.cantidad, 0);
+    let totalItems = pedido.items.reduce((acc, i) => acc + i.cantidad, 0);
 
     useEffect(() => {
         async function cargarMenu() {
@@ -26,8 +26,7 @@ export default function MenuPage() {
     if (loading) return <p className='text-blue-500 animate-pulse m-4'>Cargando el menú del restaurante...</p>;
     if (error) return <p className='bg-red-100 text-red-500 m-4'>Error: {error} — verifica que el backend está corriendo.</p>;
 
-
-
+    totalItems = 2
     return (
         <div className="m-10 flex flex-col gap-2 justify-start ">
 

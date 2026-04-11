@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { getPlatos } from '../services/api';
-import { usePedido } from '../context/PedidoContext';
+import { usePedido } from '../context/PedidoContext';//importar context pedido
 
 export default function ListadoComanda({ mesaSeleccionada }) {
-    const { pedido } = usePedido();
+    const { pedido, setPedido } = usePedido();//usamos el pedido
     const [platos, setPlatos] = useState([]);
-    const [comanda, setComanda] = useState([]);
+    //
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -26,52 +26,23 @@ export default function ListadoComanda({ mesaSeleccionada }) {
         }
         cargarDatos();
     }, []);
-
     if (loading) return <p className='text-blue-500 animate-pulse m-4'>Cargando la comanda...</p>;
     if (error) return <p className='bg-red-100 text-red-500 m-4'>Error: {error}</p>;
 
 
-    function agregarPlato(plato) {
-        const existe = comanda.find((item) => item._id === plato._id);
-        if (existe) {
-            setComanda(comanda.map((item) =>
-                item._id === plato._id
-                    ? { ...item, cantidad: item.cantidad + 1 }
-                    : item
-            ));
-        } else {
-            setComanda([...comanda, { ...plato, cantidad: 1 }]);
-        }
-    }
-
 
     function quitarPlato(_id) {
-        setComanda(comanda.filter((item, indexActual) => indexActual !== _id));
+        setPedido(pedido.items.filter((item, indexActual) => indexActual !== _id));
     }
 
-    function restarPlato(platoInput) {
-        // Buscamos el plato que queremos restar
-        const platoEnComanda = comanda.find((item) => item._id === platoInput._id);
-        if (platoEnComanda.cantidad === 1) {
-            // Si solo queda 1 y le damos a restar, quitamos el plato completamente del arreglo
-            setComanda(comanda.filter((item) => item._id !== platoInput._id));
-        } else {
-            // Si hay más de 1, simplemente le restamos -1 a su cantidad actual
-            setComanda(comanda.map((item) =>
-                item._id === platoInput._id
-                    ? { ...item, cantidad: item.cantidad - 1 }
-                    : item
-            ));
-        }
-    }
     function limpiarComanda() {
-        setComanda([]);
+        setPedido([]);
     }
 
     //const total = comanda.reduce((sum, item) => sum + item.precio * item.cantidad, 0);
     function total() {
         let total = 0;
-        comanda.forEach(item => {
+        pedido.items.forEach(item => {
             total += item.precio * item.cantidad;
         });
         return total;
@@ -121,11 +92,11 @@ export default function ListadoComanda({ mesaSeleccionada }) {
                         <span>🛒 LISTADO DE COMANDA</span>
                         <span> {mesaSeleccionada ? `Mesa ${mesaSeleccionada}` : 'PARA LLEVAR'} </span>
                     </h2>
-                    <span className='flex justify-between items-center'><h3>Total de pedidos: ({comanda.length})</h3>
+                    <span className='flex justify-between items-center'><h3>Total de pedidos: ({pedido.items.length})</h3>
                         <button className='border border-red-400 rounded-xl hover:bg-red-400 hover:text-white px-2 py-1'
                             onClick={limpiarComanda}>Limpiar Comanda</button>
                     </span>
-                    {comanda.map((item, index) => (
+                    {pedido.items.map((item, index) => (
                         <div className='grid grid-cols-4 justify-between items-center m-2' key={index}>
                             <strong>{item.nombre}</strong>
                             <div className='flex justify-between items-center'>
