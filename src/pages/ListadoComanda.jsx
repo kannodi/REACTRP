@@ -52,17 +52,40 @@ export default function ListadoComanda({ mesaSeleccionada }) {
     }
 
     function restarPlato(platoInput) {
+        const existe = pedido.items.find(item => item._id === platoInput._id);
+        let nuevosItems;
+        if (existe) {
+            nuevosItems = pedido.items.map(item =>
+                item._id === platoInput._id && item.cantidad > 0
+                    ? { ...item, cantidad: item.cantidad - 1 }
+                    : item
+            ).filter(item => item.cantidad > 0);
+        } else {
+            nuevosItems = [...pedido.items, { ...plato, precioUnitario: plato.precio, cantidad: 1 }];
+        }
+        const nuevoTotal = nuevosItems.reduce((acc, item) => acc + (item.precioUnitario * item.cantidad), 0);
+
+        setPedido({
+            ...pedido,
+            items: nuevosItems,
+            total: nuevoTotal
+        });
 
     }
 
 
     function quitarPlato(_id) {
-        setPedido(pedido.items.filter((item, indexActual) => indexActual !== _id));
+
     }
 
     function limpiarComanda() {
-        setPedido([]);
+        setPedido({
+            ...pedido,    // Mantenemos las demás propiedades como 'tipo' y 'estado'
+            items: [],    // Vaciamos la lista de platos
+            total: 0      // Reiniciamos el total a 0
+        });
     }
+
 
     //const total = comanda.reduce((sum, item) => sum + item.precio * item.cantidad, 0);
     function total() {
