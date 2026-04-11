@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { getPlatos } from '../services/api';
+import { usePedido } from '../context/PedidoContext';
 
 export default function ListadoComanda({ mesaSeleccionada }) {
+    const { pedido } = usePedido();
     const [platos, setPlatos] = useState([]);
     const [comanda, setComanda] = useState([]);
     const [error, setError] = useState(null);
@@ -65,6 +67,7 @@ export default function ListadoComanda({ mesaSeleccionada }) {
     function limpiarComanda() {
         setComanda([]);
     }
+
     //const total = comanda.reduce((sum, item) => sum + item.precio * item.cantidad, 0);
     function total() {
         let total = 0;
@@ -73,11 +76,35 @@ export default function ListadoComanda({ mesaSeleccionada }) {
         });
         return total;
     }
+
     return (
         <div className='m-10 flex flex-col gap-2 justify-start'>
             <h2 className='bg-blue-400 text-white text-2xl font-bold p-2 rounded-xl mb-2'> 🧾NUEVA COMANDA</h2>
-            <div className='grid grid-cols-2 gap-6'>
 
+
+            <div className='p-6'>
+                <h1 className='text-2xl font-bold mb-4'>Comanda activa</h1>
+                <p className='text-gray-500 mb-2'>
+                    Tipo: {pedido.tipo} · Estado: {pedido.estado}
+                </p>
+                {pedido.items.length === 0 ? (
+                    <p className='text-gray-400'>No hay items en la comanda</p>
+                ) : (
+                    <ul>
+                        {pedido.items.map((item, i) => (
+                            <li key={i} className='flex justify-between py-2 border-b'>
+                                <span>{item.nombre} x{item.cantidad}</span>
+                                <span>S/ {(item.precioUnitario * item.cantidad).toFixed(2)}</span>
+                            </li>
+                        ))}
+                    </ul>
+                )}
+                <p className='font-bold text-right mt-4'>Total: S/ {pedido.total.toFixed(2)}</p>
+            </div>
+
+
+
+            <div className='grid grid-cols-2 gap-6'>
                 {/* Columna izquierda — platos */}
                 <div className='flex flex-col gap-3'>
                     {platos.map(plato => (
