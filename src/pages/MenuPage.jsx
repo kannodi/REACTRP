@@ -1,12 +1,9 @@
 import { useState, useEffect } from 'react';
 import { getPlatos } from '../services/api';
-import { usePedido } from '../context/PedidoContext';
 export default function MenuPage() {
     const [platos, setPlatos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const { pedido } = usePedido();
-    const totalItems = pedido.items.reduce((acc, i) => acc + i.cantidad, 0);
 
     useEffect(() => {
         async function cargarMenu() {
@@ -30,18 +27,6 @@ export default function MenuPage() {
         <div className="m-10 flex flex-col gap-2 justify-start ">
 
             <h2 className="bg-blue-400 text-white text-2xl font-bold p-2 rounded-xl mb-2">Menú del Restaurante</h2>
-
-            <div>
-                {/* Badge visible en MenuPage */}
-                {totalItems > 0 && (
-                    <div className='fixed bottom-4 right-4 bg-yellow-500 text-white
-                        rounded-full px-4 py-2 font-bold shadow-lg'>
-                        Comanda: {totalItems} items
-                    </div>
-                )}
-            </div>
-
-
 
             {platos.map(plato => (
                 <div className='grid grid-cols-4 p-2 bg-gray-100 rounded-xl' key={plato._id}>

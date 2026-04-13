@@ -2,8 +2,10 @@ import PropTypes from "prop-types"
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { Link, NavLink } from "react-router-dom"
-
+import { usePedido } from '../context/PedidoContext';
 function NavBar({ nombreRestaurante = "Restaurante Raul" }) {
+    const { pedido } = usePedido();
+    const totalItems = pedido.items.reduce((acc, i) => acc + i.cantidad, 0);
     const navigate = useNavigate();
     const [sesion, setSesion] = useState(!!localStorage.getItem('token'));
     //si hay token en el localstorage, setSesion a true
@@ -30,13 +32,21 @@ function NavBar({ nombreRestaurante = "Restaurante Raul" }) {
     return (
         <>
             <nav className="flex items-center justify-between px-7 bg-blue-400">
-                <h1 className='  text-white text-4xl p-7' align='center' width='100%' height='100% '>{nombreRestaurante}</h1>
+                <h1 className='  text-white text-4xl p-7' align='center' width='100%' height='100% '> {nombreRestaurante}</h1>
                 <div className=' flex gap-2'>
                     <NavLink to='/menu' className={navBarClass}>Menu</NavLink>
                     <NavLink to='/comandas' className={navBarClass}>Comandas</NavLink>
                     <NavLink to='/carta' className={navBarClass}>Carta</NavLink >
-                    {/*<NavLink to='/mesas' className={navBarClass}>Mesas</NavLink >*/}
                 </div >
+
+                {/*MOSTRAR CARRITO*/}
+                {totalItems > 0 && (
+                    <div className='fixed bottom-4 right-4 bg-yellow-500 text-white
+                        rounded-full px-4 py-2 font-bold shadow-lg'>
+                        Comanda: {totalItems} items
+                    </div>
+                )}
+
                 <div>
                     {sesion ? (
                         <button onClick={botonLogout} className="text-white font-bold text-xl rounded-full px-1 py-1 w-fit m-2 flex justify-end">SALIR</button>
