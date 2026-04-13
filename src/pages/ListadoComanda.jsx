@@ -73,9 +73,15 @@ export default function ListadoComanda({ mesaSeleccionada }) {
 
     }
 
+    function eliminarFila(_id) {
+        const nuevosItems = pedido.items.filter((item, indexActual) => indexActual !== _id);
+        const nuevoTotal = nuevosItems.reduce((acc, item) => acc + (item.precioUnitario * item.cantidad), 0);
 
-    function quitarPlato(_id) {
-
+        setPedido({
+            ...pedido,
+            items: nuevosItems,
+            total: nuevoTotal
+        });
     }
 
     function limpiarComanda() {
@@ -86,8 +92,6 @@ export default function ListadoComanda({ mesaSeleccionada }) {
         });
     }
 
-
-    //const total = comanda.reduce((sum, item) => sum + item.precio * item.cantidad, 0);
     function total() {
         let total = 0;
         pedido.items.forEach(item => {
@@ -153,7 +157,7 @@ export default function ListadoComanda({ mesaSeleccionada }) {
                                 <button className='font-bold bg-gray-200 border border-gray-400 rounded-full px-3 py-1' onClick={() => agregarPlato(item)}> + </button>
                             </div>
                             <strong className='text-center'> S/ {item.precio * item.cantidad}</strong>
-                            <button onClick={() => quitarPlato(index)}>🗑️</button>
+                            <button onClick={() => eliminarFila(index)}>🗑️</button>
                         </div>
                     ))}
                     <div className='flex justify-between items-center bg-gray-200 border border-gray-400 rounded-xl p-2'>
