@@ -4,8 +4,11 @@ import { mesasMock } from '../data/mesas.mock.js';
 import OrderForm from '../components/OrderForm';
 import ListadoComanda from './ListadoComanda.jsx';
 import MesaCard from '../components/MesaCard';
+import { usePedido } from '../context/PedidoContext';
 
 const ComandasPages = () => {
+    const { pedido } = usePedido();
+    const totalItems = pedido.items.reduce((acc, i) => acc + i.cantidad, 0);
     // Usamos un estado para recordar qué mesa seleccionó el mesero [cite: 893-894]
     const [mesaSeleccionada, setMesaSeleccionada] = useState(mesasMock[0].numero);
     const [mostrarComandas, setMostrarComandas] = useState(false);
@@ -50,6 +53,15 @@ const ComandasPages = () => {
                     ))}
                 </div>
             )}
+            <nav>
+                {/* Badge visible en MenuPage */}
+                {totalItems > 0 && (
+                    <div className='fixed bottom-4 right-4 bg-yellow-500 text-white
+                        rounded-full px-4 py-2 font-bold shadow-lg'>
+                        Comanda: {totalItems} items
+                    </div>
+                )}
+            </nav>
         </>
     );
 };
