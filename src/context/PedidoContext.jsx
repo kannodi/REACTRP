@@ -13,8 +13,32 @@ const estadoInicial = {
 export function PedidoProvider({ children }) {
     const [pedido, setPedido] = useState(estadoInicial);
 
+    // Recalcular total cada vez que cambian los items
+    const calcularTotal = (items) =>
+        items.reduce((acc, item) => acc + item.precioUnitario * item.cantidad, 0);
+    // Agregar plato — si ya existe, incrementa cantidad
+    const agregarPlato = (plato) => {
+        setPedido(prev => {
+            const existe = prev.items.find(i => i.platoId === plato._id);
+            const nuevosItems = existe
+                ? prev.items.map(i =>
+                    i.platoId === plato._id
+                        ? { ...i, cantidad: i.cantidad + 1 }
+                        : i
+                )
+                : [...prev.items, {
+                    platoId: plato._id,
+                    nombre: plato.nombre,
+                    cantidad: 1,
+                    precioUnitario: plato.precio,
+                }];
+            return { ...prev, items: nuevosItems, total: calcularTotal(nuevosItems) };
+        });
+    };
+
+
     return (
-        <PedidoContext.Provider value={{ pedido, setPedido }}>
+        <PedidoContext.Provider value={{ pedido, agregarPlato, setPedido }}>
             {children}
         </PedidoContext.Provider>
     );
