@@ -4,7 +4,7 @@ sala: I-SALA1
 curso: REACT
 dia: 8
 estado: en_progreso
-loom: (agregar link al terminar)
+loom: https://drive.google.com/file/d/112ZYo8dyEWN6qWVVLkyjiK56LG0vHwPm/view?usp=sharing
 ---
 
 ## Secciones
@@ -12,5 +12,5 @@ loom: (agregar link al terminar)
 - [x] B — useContext en MenuPage y CarritoPage
 - [x] C — Acciones del pedido: agregar, quitar, cambiar tipo
 - [X] D — Exploración con Claude
-- [] E — Evaluación entre pares
-- [] F — Cierre del día
+- [X] E — Evaluación entre pares
+- [X] F — Cierre del día
