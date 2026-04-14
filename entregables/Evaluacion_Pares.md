@@ -2,19 +2,19 @@
 
 ## Ronda 1 — 
 
-**Evaluador:** 
-**Evaluado:** 
+**Evaluador:** Joel
+**Evaluado:** Paolo
 **Escenario elegido:** 
-
+Escenario 3: ¿Cuál es la diferencia entre el Context y un useState normal? ¿Qué problema específico del restaurante resuelve el Context que useState no puede resolver?
 
 **Resumen:**
-
+useState es utilizado para información especifica y momentánea en una ventana, mientras que Context almacena los datos arriba del navegador y reparte entre las ventanas sin reiniciarlos.
 
 
 **Qué entendió bien:**
-
+El uso de useState como contenedor de ventana local y el uso de Context como contenedor global.
 **Qué necesita repasar:**
-
+El uso de Context para manipular la información de los valores.
 
 -----------------------------------
 
