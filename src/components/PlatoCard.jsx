@@ -1,7 +1,7 @@
 import { usePedido } from '../context/PedidoContext';
 
 function PlatoCard({ plato }) {
-  const { agregarPlato, restarPlato, cambiarTipo, limpiarPedido } = usePedido();
+  const { pedido, agregarPlato, restarPlato, cambiarTipo, limpiarPedido } = usePedido();
 
   return (
     <div className='bg-white rounded-xl shadow-md p-4 flex flex-col gap-2 border border-gray-150 m-4'>
@@ -36,7 +36,7 @@ function PlatoCard({ plato }) {
         </button>
       </div>
       <div className='flex   items-center mt-1'>
-        <button onClick={() => cambiarTipo(plato._id)}
+        <button onClick={() => cambiarTipo(pedido.tipo === 'mesa' ? 'para_llevar' : 'mesa')}
           className=' mt-2  bg-yellow-500 text-white font-bold py-1 rounded hover:bg-yellow-600 p-4'>
           Cambiar Tipo</button>
         <button onClick={() => limpiarPedido()}
