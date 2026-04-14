@@ -28,7 +28,7 @@ function CartaPage() {
   return (
     <div className='m-10'>
       <h1 className="bg-blue-400 text-white text-2xl font-bold p-2 rounded-xl mb-2 ">Carta del Restaurante</h1>
-      <div className=' flex flex-col grid grid-cols-4 gap-1'>
+      <div className=' flex flex-col grid grid-cols-3 gap-1'>
         {platos.map(plato => (
           <PlatoCard
             key={plato._id}

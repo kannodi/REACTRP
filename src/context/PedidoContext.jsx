@@ -36,7 +36,7 @@ export function PedidoProvider({ children }) {
         });
     };
     // Quitar plato — decrementa o elimina si cantidad llega a 0
-    const quitarPlato = (platoId) => {
+    const restarPlato = (platoId) => {
         setPedido(prev => {
             const nuevosItems = prev.items
                 .map(i => i.platoId === platoId ? { ...i, cantidad: i.cantidad - 1 } : i)
@@ -63,7 +63,7 @@ export function PedidoProvider({ children }) {
     const limpiarPedido = () => setPedido(estadoInicial);
 
     return (
-        <PedidoContext.Provider value={{ pedido, agregarPlato, setPedido }}>
+        <PedidoContext.Provider value={{ pedido, agregarPlato, setPedido, restarPlato, cambiarTipo, asignarMesa, limpiarPedido }}>
             {children}
         </PedidoContext.Provider>
     );
