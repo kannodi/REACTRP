@@ -117,7 +117,7 @@ export default function ListadoComanda({ mesaSeleccionada }) {
                         {pedido.items.map((item, i) => (
                             <li key={i} className='flex justify-between py-2 border-b'>
                                 <span>{item.nombre} x{item.cantidad}</span>
-                                <span>S/ {(item.precio * item.cantidad).toFixed(2)}</span>
+                                <span>S/ {(item.precioUnitario * item.cantidad).toFixed(2)}</span>
                             </li>
                         ))}
                     </ul>

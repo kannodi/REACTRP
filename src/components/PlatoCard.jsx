@@ -1,7 +1,7 @@
 import { usePedido } from '../context/PedidoContext';
 
 function PlatoCard({ plato }) {
-  const { pedido, agregarPlato, restarPlato, cambiarTipo, limpiarPedido } = usePedido();
+  const { agregarPlato, restarPlato, cambiarTipo, limpiarPedido, pedido } = usePedido();
 
   return (
     <div className='bg-white rounded-xl shadow-md p-4 flex flex-col gap-2 border border-gray-150 m-4'>
@@ -51,3 +51,5 @@ function PlatoCard({ plato }) {
 
 
 export default PlatoCard
+
+

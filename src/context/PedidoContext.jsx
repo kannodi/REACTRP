@@ -6,7 +6,7 @@ const estadoInicial = {
     mesaId: null,                  // null = pedido para llevar
     tipo: 'mesa',                  // 'mesa' | 'para_llevar'
     estado: 'pendiente',           // estado actual del pedido
-    items: [],                     // [{ platoId, nombre, cantidad, precio }]
+    items: [],                     // [{ platoId, nombre, cantidad, precioUnitario }]
     total: 0,                      // calculado automáticamente
 };
 
@@ -15,7 +15,7 @@ export function PedidoProvider({ children }) {
 
     // Recalcular total cada vez que cambian los items
     const calcularTotal = (items) =>
-        items.reduce((acc, item) => acc + item.precio * item.cantidad, 0);
+        items.reduce((acc, item) => acc + item.precioUnitario * item.cantidad, 0);
     // Agregar plato — si ya existe, incrementa cantidad
     const agregarPlato = (plato) => {
         setPedido(prev => {
@@ -30,7 +30,7 @@ export function PedidoProvider({ children }) {
                     platoId: plato._id,
                     nombre: plato.nombre,
                     cantidad: 1,
-                    precio: plato.precio,
+                    precioUnitario: plato.precio,
                 }];
             return { ...prev, items: nuevosItems, total: calcularTotal(nuevosItems) };
         });
@@ -50,7 +50,7 @@ export function PedidoProvider({ children }) {
         setPedido(prev => ({
             ...prev,
             tipo,
-            mesaId: tipo === 'mesa' ? prev.mesaId : null,
+            mesaId: tipo === 'para_llevar' ? null : prev.mesaId,
         }));
     };
 
