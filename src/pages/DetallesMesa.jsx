@@ -20,13 +20,15 @@ export default function DetalleMesa() {
     }
 
     return (
-        <div className='p-6 border-2 border-gray-200 rounded-xl m-20'>
+        <div className='w-[300px] p-6 border-2 border-gray-200 rounded-xl m-8 '>
             <Link to='/comandas' className='text-blue-500 hover:underline'>
                 ← Volver a mesas
             </Link>
-            <h1 className='text-5xl font-bold mt-4'>Mesa {id}</h1>
-            <p className='text-2xl font-mono mt-4'>Capacidad: {mesa.capacidad} personas</p>
-            <p className='text-2xl font-mono mt-4'>Estado:
+            <h1 className='text-3xl font-bold mt-4'>Mesa {id}</h1>
+            <p className='text-gray-600 text-1xl font-mono mt-1'> Detalle de la mesa</p>
+            <p className='text-1xl font-mono mt-4'>Capacidad: {mesa.capacidad} personas</p>
+            <p className='text-1xl font-mono mt-4'>Comensales: {mesa.comensales}</p>
+            <p className='text-1xl font-mono mt-4'>Estado:
                 <span className={
                     mesa.estado === 'libre' ? 'text-green-500' :
                         mesa.estado === 'ocupada' ? 'text-red-500' :
@@ -37,7 +39,6 @@ export default function DetalleMesa() {
                             ' Reservada'}
                 </span>
             </p>
-            <p className='text-gray-600 text-2xl font-mono mt-4'>Detalle de la mesa {id}</p>
-        </div >
+        </div>
     );
 }
