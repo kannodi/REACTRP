@@ -35,7 +35,32 @@ export function PedidoProvider({ children }) {
             return { ...prev, items: nuevosItems, total: calcularTotal(nuevosItems) };
         });
     };
+    // Quitar plato — decrementa o elimina si cantidad llega a 0
+    const quitarPlato = (platoId) => {
+        setPedido(prev => {
+            const nuevosItems = prev.items
+                .map(i => i.platoId === platoId ? { ...i, cantidad: i.cantidad - 1 } : i)
+                .filter(i => i.cantidad > 0);
+            return { ...prev, items: nuevosItems, total: calcularTotal(nuevosItems) };
+        });
+    };
 
+    // Cambiar tipo: 'mesa' | 'para_llevar'
+    const cambiarTipo = (tipo) => {
+        setPedido(prev => ({
+            ...prev,
+            tipo,
+            mesaId: tipo === 'para_llevar' ? null : prev.mesaId,
+        }));
+    };
+
+    // Asignar mesa al pedido
+    const asignarMesa = (mesaId) => {
+        setPedido(prev => ({ ...prev, mesaId, tipo: 'mesa' }));
+    };
+
+    // Limpiar pedido — después de enviarlo o cancelarlo
+    const limpiarPedido = () => setPedido(estadoInicial);
 
     return (
         <PedidoContext.Provider value={{ pedido, agregarPlato, setPedido }}>
