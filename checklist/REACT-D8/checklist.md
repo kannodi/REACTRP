@@ -1,5 +1,5 @@
 ---
-alumno: [tunombre]
+alumno: Joel - Paolo
 sala: I-SALA1
 curso: REACT
 dia: 8
@@ -10,7 +10,7 @@ loom: (agregar link al terminar)
 ## Secciones
 - [x] A — createContext y PedidoProvider
 - [x] B — useContext en MenuPage y CarritoPage
-- [ ] C — Acciones del pedido: agregar, quitar, cambiar tipo
-- [ ] D — Exploración con Claude
-- [ ] E — Evaluación entre pares
-- [ ] F — Cierre del día
+- [x] C — Acciones del pedido: agregar, quitar, cambiar tipo
+- [X] D — Exploración con Claude
+- [] E — Evaluación entre pares
+- [] F — Cierre del día
