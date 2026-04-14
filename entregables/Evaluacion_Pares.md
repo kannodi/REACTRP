@@ -1,6 +1,4 @@
-# Evaluación Cruzada 
-
----
+# Evaluación Pares 
 
 ## Ronda 1 — 
 
