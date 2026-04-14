@@ -36,7 +36,7 @@ function PlatoCard({ plato }) {
         </button>
       </div>
       <div className='flex   items-center mt-1'>
-        <button onClick={() => cambiarTipo(pedido.tipo === 'mesa' ? 'para_llevar' : 'mesa')}
+        <button onClick={() => cambiarTipo(pedido.tipo === 'mesa' ? 'Para llevar' : 'mesa')}
           className=' mt-2  bg-yellow-500 text-white font-bold py-1 rounded hover:bg-yellow-600 p-4'>
           Cambiar Tipo</button>
         <button onClick={() => limpiarPedido()}

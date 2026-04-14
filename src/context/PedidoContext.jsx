@@ -50,7 +50,7 @@ export function PedidoProvider({ children }) {
         setPedido(prev => ({
             ...prev,
             tipo,
-            mesaId: tipo === 'para_llevar' ? null : prev.mesaId,
+            mesaId: tipo === 'Para LLevar' ? null : prev.mesaId,
         }));
     };
 
