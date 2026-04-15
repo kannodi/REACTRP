@@ -44,6 +44,39 @@ export async function getPlatos() {
     return response.data;
 }
 
+
+//BLOQUE A
+// ── Mesas ────────────────────────────────────────
+export async function getMesas() {
+    const response = await api.get('/mesas');
+    return response.data;
+}
+
+export async function getMesasDisponibles() {
+    const response = await api.get('/mesas?estado=disponible');
+    return response.data;
+}
+
+// ── Pedidos ───────────────────────────────────────
+export async function crearPedido(pedidoData) {
+    // pedidoData: { mesaId, tipo, items[] }
+    const response = await api.post('/pedidos', pedidoData);
+    return response.data;  // pedido creado con _id y estado: pendiente
+}
+
+export async function getPedido(id) {
+    const response = await api.get(`/pedidos/${id}`);
+    return response.data;
+}
+
+export async function cambiarEstadoPedido(id, estado) {
+    // estado: 'en_preparacion' | 'lista' | 'entregada' | 'cancelada'
+    const response = await api.patch(`/pedidos/${id}/estado`, { estado });
+    return response.data;
+}
+
+
+
 // login SIGUE USANDO `axios` directo -> No necesita token para mandar correo/password
 export async function login(email, password) {
     // Aquí sí ponemos la URL completa porque no usamos la instancia
