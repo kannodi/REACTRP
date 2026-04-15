@@ -32,11 +32,11 @@ export default function DetalleMesa() {
                 <span className={
                     mesa.estado === 'libre' ? 'text-green-500' :
                         mesa.estado === 'ocupada' ? 'text-red-500' :
-                            'text-yellow-500'
+                            'text-gray-500'
                 }>
                     {mesa.estado === 'libre' ? ' Libre' :
                         mesa.estado === 'ocupada' ? ' Ocupada' :
-                            ' Reservada'}
+                            ' Fuera de servicio'}
                 </span>
             </p>
         </div>
