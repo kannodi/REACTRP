@@ -35,7 +35,7 @@ function NavBar({ nombreRestaurante = "Restaurante Raul" }) {
                 <h1 className='  text-white text-4xl p-7' align='center' width='100%' height='100% '> {nombreRestaurante}</h1>
                 <div className=' flex gap-2'>
                     <NavLink to='/menu' className={navBarClass}>Menu</NavLink>
-                    <NavLink to='/comandas' className={navBarClass}>Comandas</NavLink>
+                    <NavLink to='/mesas' className={navBarClass}>Mesas</NavLink>
                     <NavLink to='/carta' className={navBarClass}>Carta</NavLink >
                 </div >
 

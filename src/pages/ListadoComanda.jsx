@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { getPlatos } from '../services/api';
 import { usePedido } from '../context/PedidoContext';//importar context pedido
-
+import { Link } from 'react-router-dom';
 export default function ListadoComanda({ mesaSeleccionada }) {
+
     const { pedido, setPedido } = usePedido();//usamos el pedido
     const [platos, setPlatos] = useState([]);
     //
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
-
     useEffect(() => {
         async function cargarDatos() {
             try {
@@ -26,6 +26,7 @@ export default function ListadoComanda({ mesaSeleccionada }) {
         }
         cargarDatos();
     }, []);
+
     if (loading) return <p className='text-blue-500 animate-pulse m-4'>Cargando la comanda...</p>;
     if (error) return <p className='bg-red-100 text-red-500 m-4'>Error: {error}</p>;
 
@@ -102,6 +103,9 @@ export default function ListadoComanda({ mesaSeleccionada }) {
 
     return (
         <div className='m-10 flex flex-col gap-2 justify-start'>
+            <Link to='/mesas' className='text-blue-500 hover:underline'>
+                ← Volver a mesas
+            </Link>
             <h2 className='bg-blue-400 text-white text-2xl font-bold p-2 rounded-xl mb-2'> 🧾NUEVA COMANDA</h2>
 
 
@@ -142,7 +146,6 @@ export default function ListadoComanda({ mesaSeleccionada }) {
                 <div className='flex flex-col gap-3 border border-gray-400 rounded-xl p-2'>
                     <h2 className='bg-yellow-500 text-white text-md font-bold p-3 gap-5 rounded-xl flex justify-between items-center'>
                         <span>🛒 LISTADO DE COMANDA</span>
-                        <span> {mesaSeleccionada ? `Mesa ${mesaSeleccionada}` : 'PARA LLEVAR'} </span>
                     </h2>
                     <span className='flex justify-between items-center'><h3>Total de pedidos: ({pedido.items.length})</h3>
                         <button className='border border-red-400 rounded-xl hover:bg-red-400 hover:text-white px-2 py-1'

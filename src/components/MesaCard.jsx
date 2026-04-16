@@ -1,14 +1,12 @@
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
-function MesaCard({ numero, capacidad, estado, comensales }) {
+function MesaCard({ id, capacidad, estado, comensales }) {
   return (
-    <div className='p-10' >
-      <Link to={`/mesas/${numero}`} className='text-white hover:underline text-center text-bold'>Ver detalle </Link>
-      <h2 className='text-center text-4xl m-4'>Mesa {numero}</h2>
-      {/*<p>Capacidad: {capacidad}</p>
-      <p>Comensales: {comensales}</p>*/}
-      <p className='mt-2 text-center'>{estado === "libre" ? "Libre" : estado === "ocupada" ? "Ocupada" : "Fuera de servicio"}</p>
+    <div className='p-10 flex flex-col items-center' >
+      <Link to={`/mesas/${id}`} className='text-black hover:underline  text-bold text-2xl'>Ver detalle </Link>
+      <h2 className='text-center text-4xl m-4'>Mesa {id}</h2>
+      <p className='mt-2 text-center'>{estado === "disponible" ? "Disponible" : estado === "ocupada" ? "Ocupada" : estado === "reservada" ? "Reservada" : "Fuera de servicio"}</p>
     </div >
   )
 }
