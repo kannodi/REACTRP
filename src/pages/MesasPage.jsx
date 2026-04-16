@@ -9,7 +9,7 @@ const MesasPage = () => {
     const [mesas, setMesas] = useState([mesasMock]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const { asignarMesa } = usePedido();
+    const { asignarMesa, asignarParaLlevar } = usePedido();
     const navigate = useNavigate();
 
     const ESTADO_CLASES = {
@@ -31,6 +31,11 @@ const MesasPage = () => {
         navigate(`/mesas/ListadoComanda`);
     };
 
+    const handleParaLlevar = () => {
+        asignarParaLlevar();
+        navigate(`/mesas/ListadoComanda`);
+    };
+
     if (loading) return <p className='p-6 text-gray-500'>Cargando mesas...</p>;
     if (error) return <p className='p-6 text-red-500'>{error}</p>;
 
@@ -38,6 +43,10 @@ const MesasPage = () => {
         <>
             <div className='p-6'>
                 <h1 className='text-2xl font-bold mb-6'>Mesas del restaurante</h1>
+                <button onClick={() => handleParaLlevar()}
+                    className='bg-cyan-500 hover:bg-cyan-700 text-white text-2xl font-bold rounded-xl px-6 py-2'>
+                    Para llevar
+                </button>
 
                 <div className='grid grid-cols-5 gap-5 ml-10 mr-10 mt-10 '>
                     {mesasMock.map(mesa => (

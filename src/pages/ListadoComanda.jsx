@@ -2,9 +2,10 @@ import { useState, useEffect } from 'react';
 import { getPlatos } from '../services/api';
 import { usePedido } from '../context/PedidoContext';//importar context pedido
 import { Link } from 'react-router-dom';
-export default function ListadoComanda({ mesaSeleccionada }) {
 
+export default function ListadoComanda({ mesaSeleccionada }) {
     const { pedido, setPedido } = usePedido();//usamos el pedido
+    const { agregarPlato, restarPlato, removePlato, limpiarPedido } = usePedido();
     const [platos, setPlatos] = useState([]);
     //
     const [error, setError] = useState(null);
@@ -31,8 +32,8 @@ export default function ListadoComanda({ mesaSeleccionada }) {
     if (error) return <p className='bg-red-100 text-red-500 m-4'>Error: {error}</p>;
 
 
-    function agregarPlato(plato) {
-        const existe = pedido.items.find(item => item._id === plato._id);
+    /*function agregarPlato(plato) {
+        /*const existe = pedido.items.find(item => item._id === plato._id);
         let nuevosItems;
         if (existe) {
             nuevosItems = pedido.items.map(item =>
@@ -43,16 +44,17 @@ export default function ListadoComanda({ mesaSeleccionada }) {
         } else {
             nuevosItems = [...pedido.items, { ...plato, precioUnitario: plato.precio, cantidad: 1 }];
         }
-        const nuevoTotal = nuevosItems.reduce((acc, item) => acc + (item.precioUnitario * item.cantidad), 0);
+        const nuevoTotal = nuevosItems.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
 
         setPedido({
             ...pedido,
             items: nuevosItems,
             total: nuevoTotal
         });
-    }
+        _agregarPlato(plato);
+    }*/
 
-    function restarPlato(platoInput) {
+    /*function restarPlato(platoInput) {
         const existe = pedido.items.find(item => item._id === platoInput._id);
         let nuevosItems;
         if (existe) {
@@ -64,33 +66,35 @@ export default function ListadoComanda({ mesaSeleccionada }) {
         } else {
             nuevosItems = [...pedido.items, { ...plato, precioUnitario: plato.precio, cantidad: 1 }];
         }
-        const nuevoTotal = nuevosItems.reduce((acc, item) => acc + (item.precioUnitario * item.cantidad), 0);
+        const nuevoTotal = nuevosItems.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
 
         setPedido({
             ...pedido,
             items: nuevosItems,
             total: nuevoTotal
         });
-
-    }
+        _restarPlato(platoInput);
+    }*/
 
     function eliminarFila(_id) {
-        const nuevosItems = pedido.items.filter((item, indexActual) => indexActual !== _id);
-        const nuevoTotal = nuevosItems.reduce((acc, item) => acc + (item.precioUnitario * item.cantidad), 0);
+        /*const nuevosItems = pedido.items.filter((item, indexActual) => indexActual !== _id);
+        const nuevoTotal = nuevosItems.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
 
         setPedido({
             ...pedido,
             items: nuevosItems,
             total: nuevoTotal
-        });
+        });*/
+        removePlato(_id);
     }
 
     function limpiarComanda() {
-        setPedido({
+        /*setPedido({
             ...pedido,    // Mantenemos las demás propiedades como 'tipo' y 'estado'
             items: [],    // Vaciamos la lista de platos
             total: 0      // Reiniciamos el total a 0
-        });
+        });*/
+        limpiarPedido();
     }
 
     function total() {
@@ -155,11 +159,11 @@ export default function ListadoComanda({ mesaSeleccionada }) {
                         <div className='grid grid-cols-4 justify-between items-center m-2' key={index}>
                             <strong>{item.nombre}</strong>
                             <div className='flex justify-between items-center'>
-                                <button className='font-bold bg-gray-200 border border-gray-400 rounded-full px-3 py-1' onClick={() => restarPlato(item)}> - </button>
+                                <button className='font-bold bg-gray-200 border border-gray-400 rounded-full px-3 py-1' onClick={() => restarPlato(item.platoId)}> - </button>
                                 <span>{item.cantidad}</span>
-                                <button className='font-bold bg-gray-200 border border-gray-400 rounded-full px-3 py-1' onClick={() => agregarPlato(item)}> + </button>
+                                <button className='font-bold bg-gray-200 border border-gray-400 rounded-full px-3 py-1' onClick={() => agregarPlato({ _id: item.platoId, nombre: item.nombre, precio: item.precioUnitario })}> + </button>
                             </div>
-                            <strong className='text-center'> S/ {item.precio * item.cantidad}</strong>
+                            <strong className='text-center'> S/ {item.precioUnitario * item.cantidad}</strong>
                             <button onClick={() => eliminarFila(index)}>🗑️</button>
                         </div>
                     ))}

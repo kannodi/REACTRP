@@ -59,11 +59,25 @@ export function PedidoProvider({ children }) {
         setPedido(prev => ({ ...prev, mesaId, tipo: 'mesa' }));
     };
 
+    const asignarParaLlevar = () => {
+        setPedido(prev => ({ ...prev, mesaId: null, tipo: 'para_llevar' }));
+    };
+
+    const removePlato = (_id) => {
+        const nuevosItems = pedido.items.filter((item, indexActual) => indexActual !== _id);
+        const nuevoTotal = nuevosItems.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
+
+        setPedido({
+            ...pedido,
+            items: nuevosItems,
+            total: nuevoTotal
+        });
+    };
     // Limpiar pedido — después de enviarlo o cancelarlo
     const limpiarPedido = () => setPedido(estadoInicial);
 
     return (
-        <PedidoContext.Provider value={{ pedido, agregarPlato, setPedido, restarPlato, cambiarTipo, asignarMesa, limpiarPedido }}>
+        <PedidoContext.Provider value={{ pedido, agregarPlato, setPedido, restarPlato, cambiarTipo, asignarMesa, removePlato, asignarParaLlevar, limpiarPedido }}>
             {children}
         </PedidoContext.Provider>
     );
