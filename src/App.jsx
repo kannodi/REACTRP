@@ -1,14 +1,14 @@
-import { BrowserRouter as Router, Routes, Route, BrowserRouter } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, BrowserRouter, Navigate } from 'react-router-dom'
 import ProtectedRoute from './components/ProtectedRoute'//RUTA PROTEGIDA
-import { Navigate } from 'react-router-dom' //NAVEGACION
 import NavBar from './components/NavBar'
 import LoginPage from './pages/LoginPage'
+import NotFound from './pages/NotFound'
 import MenuPage from './pages/MenuPage'
-import CartaPage from './pages/CartaPage'
 import MesasPage from './pages/MesasPage'
 import DetalleMesa from './pages/DetallesMesa'
 import ListadoComanda from './pages/ListadoComanda'
-import NotFound from './pages/NotFound'
+import CartaPage from './pages/CartaPage'
+
 function App() {
   return (
     <BrowserRouter>
