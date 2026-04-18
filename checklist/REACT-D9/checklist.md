@@ -5,7 +5,7 @@ estado: en_progreso  loom: (agregar link al terminar)
 ## Secciones
 - [x-] A — APIs de mesas y pedidos en api.js
 - [x-] B — MesasPage conectada con GET /api/mesas
-- [ ] C — CarritoPage conectada con POST /api/pedidos
-- [ ] D — Exploración con Claude
+- [X] C — CarritoPage conectada con POST /api/pedidos
+- [X] D — Exploración con Claude
 - [ ] E — Evaluación entre pares
 - [ ] F — Cierre del día
