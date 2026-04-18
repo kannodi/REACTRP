@@ -1,7 +1,5 @@
 import { createContext, useContext, useState } from 'react';
-
 const PedidoContext = createContext(null);
-
 const estadoInicial = {
     mesaId: null,                  // null = pedido para llevar
     tipo: 'mesa',                  // 'mesa' | 'para_llevar'
@@ -9,10 +7,8 @@ const estadoInicial = {
     items: [],                     // [{ platoId, nombre, cantidad, precioUnitario }]
     total: 0,                      // calculado automáticamente
 };
-
 export function PedidoProvider({ children }) {
     const [pedido, setPedido] = useState(estadoInicial);
-
     // Recalcular total cada vez que cambian los items
     const calcularTotal = (items) =>
         items.reduce((acc, item) => acc + item.precioUnitario * item.cantidad, 0);
@@ -35,7 +31,8 @@ export function PedidoProvider({ children }) {
             return { ...prev, items: nuevosItems, total: calcularTotal(nuevosItems) };
         });
     };
-    // Quitar plato — decrementa o elimina si cantidad llega a 0
+
+    // Restar un plato — decrementa o elimina si cantidad llega a 0
     const restarPlato = (platoId) => {
         setPedido(prev => {
             const nuevosItems = prev.items
@@ -44,6 +41,19 @@ export function PedidoProvider({ children }) {
             return { ...prev, items: nuevosItems, total: calcularTotal(nuevosItems) };
         });
     };
+
+    const quitarPlatoPorIndice = (index) => {
+        const nuevosItems = pedido.items.filter((item, indexActual) => indexActual !== index);
+        const nuevoTotal = calcularTotal(nuevosItems);
+
+        setPedido({
+            ...pedido,
+            items: nuevosItems,
+            total: nuevoTotal
+        });
+    };
+    // Limpiar pedido — después de enviarlo o cancelarlo
+    const limpiarPedido = () => setPedido(estadoInicial);
 
     // Cambiar tipo: 'mesa' | 'para_llevar'
     const cambiarTipo = (tipo) => {
@@ -63,21 +73,8 @@ export function PedidoProvider({ children }) {
         setPedido(prev => ({ ...prev, mesaId: null, tipo: 'para_llevar' }));
     };
 
-    const removePlato = (_id) => {
-        const nuevosItems = pedido.items.filter((item, indexActual) => indexActual !== _id);
-        const nuevoTotal = nuevosItems.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
-
-        setPedido({
-            ...pedido,
-            items: nuevosItems,
-            total: nuevoTotal
-        });
-    };
-    // Limpiar pedido — después de enviarlo o cancelarlo
-    const limpiarPedido = () => setPedido(estadoInicial);
-
     return (
-        <PedidoContext.Provider value={{ pedido, agregarPlato, setPedido, restarPlato, cambiarTipo, asignarMesa, removePlato, asignarParaLlevar, limpiarPedido }}>
+        <PedidoContext.Provider value={{ pedido, agregarPlato, setPedido, restarPlato, cambiarTipo, asignarMesa, quitarPlatoPorIndice, asignarParaLlevar, limpiarPedido }}>
             {children}
         </PedidoContext.Provider>
     );

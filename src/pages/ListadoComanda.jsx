@@ -1,15 +1,17 @@
 import { useState, useEffect } from 'react';
-import { getPlatos } from '../services/api';
+import { getPlatos, crearPedido, cambiarEstadoPedido } from '../services/api';
 import { usePedido } from '../context/PedidoContext';//importar context pedido
 import { Link } from 'react-router-dom';
 
-export default function ListadoComanda({ mesaSeleccionada }) {
-    const { pedido, setPedido } = usePedido();//usamos el pedido
-    const { agregarPlato, restarPlato, removePlato, limpiarPedido } = usePedido();
+export default function ListadoComanda() {
+    const { agregarPlato, restarPlato, quitarPlatoPorIndice, limpiarPedido, pedido } = usePedido();
     const [platos, setPlatos] = useState([]);
-    //
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
+    //SIMULACION DE PEDIDO ENVIADO
+    const [enviando, setEnviando] = useState(false);
+    const [pedidoCreado, setPedidoCreado] = useState(null);
+
     useEffect(() => {
         async function cargarDatos() {
             try {
@@ -31,79 +33,6 @@ export default function ListadoComanda({ mesaSeleccionada }) {
     if (loading) return <p className='text-blue-500 animate-pulse m-4'>Cargando la comanda...</p>;
     if (error) return <p className='bg-red-100 text-red-500 m-4'>Error: {error}</p>;
 
-
-    /*function agregarPlato(plato) {
-        /*const existe = pedido.items.find(item => item._id === plato._id);
-        let nuevosItems;
-        if (existe) {
-            nuevosItems = pedido.items.map(item =>
-                item._id === plato._id
-                    ? { ...item, cantidad: item.cantidad + 1 }
-                    : item
-            );
-        } else {
-            nuevosItems = [...pedido.items, { ...plato, precioUnitario: plato.precio, cantidad: 1 }];
-        }
-        const nuevoTotal = nuevosItems.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
-
-        setPedido({
-            ...pedido,
-            items: nuevosItems,
-            total: nuevoTotal
-        });
-        _agregarPlato(plato);
-    }*/
-
-    /*function restarPlato(platoInput) {
-        const existe = pedido.items.find(item => item._id === platoInput._id);
-        let nuevosItems;
-        if (existe) {
-            nuevosItems = pedido.items.map(item =>
-                item._id === platoInput._id && item.cantidad > 0
-                    ? { ...item, cantidad: item.cantidad - 1 }
-                    : item
-            ).filter(item => item.cantidad > 0);
-        } else {
-            nuevosItems = [...pedido.items, { ...plato, precioUnitario: plato.precio, cantidad: 1 }];
-        }
-        const nuevoTotal = nuevosItems.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
-
-        setPedido({
-            ...pedido,
-            items: nuevosItems,
-            total: nuevoTotal
-        });
-        _restarPlato(platoInput);
-    }*/
-
-    function eliminarFila(_id) {
-        /*const nuevosItems = pedido.items.filter((item, indexActual) => indexActual !== _id);
-        const nuevoTotal = nuevosItems.reduce((acc, item) => acc + (item.precio * item.cantidad), 0);
-
-        setPedido({
-            ...pedido,
-            items: nuevosItems,
-            total: nuevoTotal
-        });*/
-        removePlato(_id);
-    }
-
-    function limpiarComanda() {
-        /*setPedido({
-            ...pedido,    // Mantenemos las demás propiedades como 'tipo' y 'estado'
-            items: [],    // Vaciamos la lista de platos
-            total: 0      // Reiniciamos el total a 0
-        });*/
-        limpiarPedido();
-    }
-
-    function total() {
-        let total = 0;
-        pedido.items.forEach(item => {
-            total += item.precio * item.cantidad;
-        });
-        return total;
-    }
 
     return (
         <div className='m-10 flex flex-col gap-2 justify-start'>
@@ -133,19 +62,16 @@ export default function ListadoComanda({ mesaSeleccionada }) {
                 <p className='font-bold text-right mt-4'>Total: S/ {pedido.total.toFixed(2)}</p>
             </div>
 
-
-
             <div className='grid grid-cols-2 gap-6'>
                 {/* Columna izquierda — platos */}
                 <div className='flex flex-col gap-3'>
                     {platos.map(plato => (
-                        <div className='flex justify-between items-center' key={plato._id}>
+                        <div className='flex justify-between items-center bg-gray-200 rounded-xl p-2' key={plato._id}>
                             <strong className='px-2 py-1'>{plato.nombre} — S/ {plato.precio}</strong>
                             <button className='bg-gray-200 rounded-xl px-2 py-1' onClick={() => agregarPlato(plato)}>Agregar</button>
                         </div>
                     ))}
                 </div>
-
                 {/* Columna derecha — comanda */}
                 <div className='flex flex-col gap-3 border border-gray-400 rounded-xl p-2'>
                     <h2 className='bg-yellow-500 text-white text-md font-bold p-3 gap-5 rounded-xl flex justify-between items-center'>
@@ -153,7 +79,7 @@ export default function ListadoComanda({ mesaSeleccionada }) {
                     </h2>
                     <span className='flex justify-between items-center'><h3>Total de pedidos: ({pedido.items.length})</h3>
                         <button className='border border-red-400 rounded-xl hover:bg-red-400 hover:text-white px-2 py-1'
-                            onClick={limpiarComanda}>Limpiar Comanda</button>
+                            onClick={limpiarPedido}>Limpiar Comanda</button>
                     </span>
                     {pedido.items.map((item, index) => (
                         <div className='grid grid-cols-4 justify-between items-center m-2' key={index}>
@@ -164,11 +90,11 @@ export default function ListadoComanda({ mesaSeleccionada }) {
                                 <button className='font-bold bg-gray-200 border border-gray-400 rounded-full px-3 py-1' onClick={() => agregarPlato({ _id: item.platoId, nombre: item.nombre, precio: item.precioUnitario })}> + </button>
                             </div>
                             <strong className='text-center'> S/ {item.precioUnitario * item.cantidad}</strong>
-                            <button onClick={() => eliminarFila(index)}>🗑️</button>
+                            <button onClick={() => quitarPlatoPorIndice(index)}>🗑️</button>
                         </div>
                     ))}
                     <div className='flex justify-between items-center bg-gray-200 border border-gray-400 rounded-xl p-2'>
-                        <strong>Total: S/ {total()}</strong>
+                        <strong>Total: S/ {pedido.total}</strong>
                         <button className='bg-gray-200 border border-black rounded-xl hover:bg-black hover:text-white px-2 py-1 active:scale-90 '>Enviar Comanda</button>
                     </div>
                 </div>

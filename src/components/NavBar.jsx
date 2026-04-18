@@ -1,7 +1,7 @@
 import PropTypes from "prop-types"
 import { useNavigate } from "react-router-dom"
 import { useState, useEffect } from "react"
-import { Link, NavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import { usePedido } from '../context/PedidoContext';
 function NavBar({ nombreRestaurante = "Restaurante Raul" }) {
     const { pedido } = usePedido();
