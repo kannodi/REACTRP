@@ -22,7 +22,7 @@ export default function DetalleMesa() {
             <Link to='/mesas' className='text-blue-500 hover:underline'>
                 ← Volver a mesas
             </Link>
-            <h1 className='text-3xl font-bold mt-4'>Mesa {id}</h1>
+            <h1 className='text-3xl font-bold mt-4'>Mesa {mesa.numero}</h1>
             <p className='text-gray-600 text-1xl font-mono mt-1'> Detalle de la mesa</p>
             <p className='text-1xl font-mono mt-4'>Capacidad: {mesa.capacidad} personas</p>
             <p className='text-1xl font-mono mt-4'>Comensales: {mesa.comensales}</p>
