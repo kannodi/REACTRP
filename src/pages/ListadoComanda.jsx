@@ -9,9 +9,43 @@ export default function ListadoComanda() {
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(true);
     //SIMULACION DE PEDIDO ENVIADO
+    /*
     const [enviando, setEnviando] = useState(false);
     const [pedidoCreado, setPedidoCreado] = useState(null);
+    const handleEnviarComanda = async () => {
+        if (pedido.items.length === 0) return;
+        setEnviando(true);
+        setError(null);
+        try {
+            const nuevoPedido = await crearPedido({
+                mesaId: pedido.mesaId,
+                tipo: pedido.tipo,
+                items: pedido.items,
+            });
+            setPedidoCreado(nuevoPedido);
+            limpiarPedido();  // limpiar el Context después del éxito
+        } catch (err) {
+            setError('No se pudo crear el pedido. Intenta de nuevo.');
+        } finally {
+            setEnviando(false);
+        }
+    };
 
+    // Si el pedido ya fue creado — mostrar confirmación
+    if (pedidoCreado) {
+        return (
+            <div className='p-6 text-center'>
+                <div className='text-6xl mb-4'>✅</div>
+                <h2 className='text-2xl font-bold text-green-700'>Comanda enviada</h2>
+                <p className='text-gray-600 mt-2'>
+                    Pedido #{pedidoCreado._id.slice(-6).toUpperCase()}
+                </p>
+                <p className='text-gray-500 mt-1'>Estado: {pedidoCreado.estado}</p>
+                <p className='text-gray-500'>Total: S/ {pedidoCreado.total.toFixed(2)}</p>
+            </div>
+        );
+    }
+    */
     useEffect(() => {
         async function cargarDatos() {
             try {
