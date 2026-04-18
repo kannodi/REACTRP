@@ -4,7 +4,7 @@ const estadoInicial = {
     mesaId: null,                  // null = pedido para llevar
     tipo: 'mesa',                  // 'mesa' | 'para_llevar'
     estado: 'pendiente',           // estado actual del pedido
-    items: [],                     // [{ platoId, nombre, cantidad, precioUnitario }]
+    items: [],                     // [{ _id, nombre, cantidad, precioUnitario }]
     total: 0,                      // calculado automáticamente
 };
 export function PedidoProvider({ children }) {
@@ -67,6 +67,7 @@ export function PedidoProvider({ children }) {
     // Asignar mesa al pedido
     const asignarMesa = (mesaId) => {
         setPedido(prev => ({ ...prev, mesaId, tipo: 'mesa' }));
+        console.log(mesaId);
     };
 
     const asignarParaLlevar = () => {

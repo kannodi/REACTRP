@@ -58,16 +58,37 @@ export async function getMesasDisponibles() {
 }
 
 // ── Pedidos ───────────────────────────────────────
-export async function crearPedido(pedidoData) {
-    // pedidoData: { mesaId, tipo, items[] }
-    const response = await api.post('/pedidos', pedidoData);
-    return response.data;  // pedido creado con _id y estado: pendiente
-}
-
 export async function getPedido(id) {
     const response = await api.get(`/pedidos/${id}`);
     return response.data;
 }
+
+export async function crearPedido(pedidoData) {
+    try {
+        // Intento real al backend   // pedidoData: { mesaId, tipo, items[] }
+        const response = await api.post('/pedidos', pedidoData);
+        return response.data;  // pedido creado con _id y estado: pendiente
+    } catch (error) {
+        // --- BACKEND SIMULADO ---
+        // Si el backend real falla (ej. no está encendido), simulamos la respuesta
+        console.warn("Backend no detectado. Usando respuesta simulada.");
+
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve({
+                    _id: "65f8a" + Math.random().toString(16).slice(2, 9), // ID falso tipo MongoDB
+                    mesaId: pedidoData.mesaId,
+                    tipo: pedidoData.tipo,
+                    items: pedidoData.items,
+                    estado: 'pendiente',
+                    total: pedidoData.items.reduce((acc, i) => acc + (i.precioUnitario * i.cantidad), 0),
+                    createdAt: new Date().toISOString()
+                });
+            }, 1500); // Simulamos latencia de red
+        });
+    }
+}
+
 
 export async function cambiarEstadoPedido(id, estado) {
     // estado: 'en_preparacion' | 'lista' | 'entregada' | 'cancelada'
