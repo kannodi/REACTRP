@@ -25,8 +25,8 @@ const MesasPage = () => {
             .finally(() => setLoading(false));
     }, []);*/
 
-    const handleSeleccionarMesa = (numero) => {
-        asignarMesa(numero);
+    const handleSeleccionarMesa = (mesaid) => {
+        asignarMesa(mesaid);
         navigate(`/mesas/ListadoComanda`);
     };
 
@@ -53,7 +53,7 @@ const MesasPage = () => {
                         <div key={mesa.id} className={`flex flex-col items-center border-2 rounded-xl p-4 ${ESTADO_CLASES[mesa.estado]}`} >
                             <MesaCard id={mesa.id} numero={mesa.numero} capacidad={mesa.capacidad} estado={mesa.estado} comensales={mesa.comensales} />
                             {mesa.estado === 'disponible' && (
-                                <button onClick={() => handleSeleccionarMesa(mesa.numero)}
+                                <button onClick={() => handleSeleccionarMesa(mesa.id)}
                                     className={`${mesa.estado === 'disponible' ? 'bg-green-500 hover:bg-green-700' :
                                         mesa.estado === 'ocupada' ? 'bg-red-500 hover:bg-red-700' : mesa.estado === 'reservada' ? 'bg-yellow-500 hover:bg-yellow-700' :
                                             'bg-gray-500 hover:bg-gray-700'} text-white text-2xl font-bold rounded-xl px-6 py-2`}>
